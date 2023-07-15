@@ -27,7 +27,7 @@ void* SleepThread_hook(uint64_t nanoseconds) {
 		while (nx_lock) 
 			nn::os::SleepThread(nn::TimeSpan(10000));
 		nx_lock = true;
-		fwrite("Address0: 0x", 11, 1, file);
+		fwrite("Address0: 0x", 12, 1, file);
 		char buffer[34] = "";
 		ultoa((unsigned long)returnInstructionOffset((uintptr_t)__builtin_return_address(0)), &buffer[0], 16);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
