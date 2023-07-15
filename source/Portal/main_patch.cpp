@@ -23,16 +23,13 @@ void* SleepThread_hook(uint64_t nanoseconds) {
 		if (file)
 			Initialized = true;
 	}
-	else if (nanoseconds >= 1000000 && nanoseconds <= 33333333) {
+	else if (nanoseconds >= 10'000'000 && nanoseconds <= 33'333'333) {
 		while (nx_lock) 
 			nn::os::SleepThread(nn::TimeSpan(10000));
 		nx_lock = true;
 		fwrite("Address0: 0x", 11, 1, file);
 		char buffer[34] = "";
 		ultoa((unsigned long)returnInstructionOffset((uintptr_t)__builtin_return_address(0)), &buffer[0], 16);
-		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
-		fwrite(", Address1: 0x", 13, 1, file);
-		ultoa((unsigned long)returnInstructionOffset((uintptr_t)__builtin_return_address(1)), &buffer[0], 16);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
 		fwrite(", Nanoseconds: ", 15, 1, file);
 		ultoa(nanoseconds, &buffer[0], 10);
