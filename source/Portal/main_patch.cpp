@@ -33,10 +33,10 @@ int thrd_sleep_hook(const struct timespec* duration, struct timespec* remaining)
 		char buffer[64] = "";
 		ultoa((unsigned long)returnInstructionOffset((uintptr_t)__builtin_return_address(0)), &buffer[0], 16);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
-		fwrite(", duration -> tv_nsec: ", 15, 1, file);
+		fwrite(", duration -> tv_nsec: ", 23, 1, file);
 		ultoa(duration -> tv_nsec, &buffer[0], 10);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
-		fwrite(", remaining -> tv_nsec: ", 15, 1, file);
+		fwrite(", remaining -> tv_nsec: ", 24, 1, file);
 		ultoa(remaining -> tv_nsec, &buffer[0], 10);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
 		fwrite("\n", 1, 1, file);
@@ -61,11 +61,11 @@ void* clock_nanosleep_hook(clockid_t clockid, int flags, const struct timespec *
 		char buffer[64] = "";
 		ultoa((unsigned long)returnInstructionOffset((uintptr_t)__builtin_return_address(0)), &buffer[0], 16);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
-		fwrite(", request -> tv_nsec: ", 15, 1, file);
+		fwrite(", request -> tv_nsec: ", 22, 1, file);
 		ultoa(request -> tv_nsec, &buffer[0], 10);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
 		if (remain) {
-			fwrite(", remain -> tv_nsec: ", 15, 1, file);
+			fwrite(", remain -> tv_nsec: ", 21, 1, file);
 			ultoa(remain -> tv_nsec, &buffer[0], 10);
 			fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
 		}
@@ -91,11 +91,11 @@ void* nanosleep_hook(const struct timespec *req, struct timespec *_Nullable rem)
 		char buffer[64] = "";
 		ultoa((unsigned long)returnInstructionOffset((uintptr_t)__builtin_return_address(0)), &buffer[0], 16);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
-		fwrite(", req -> tv_nsec: ", 15, 1, file);
+		fwrite(", req -> tv_nsec: ", 18, 1, file);
 		ultoa(req -> tv_nsec, &buffer[0], 10);
 		fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
 		if (rem) {
-			fwrite(", rem -> tv_nsec: ", 15, 1, file);
+			fwrite(", rem -> tv_nsec: ", 18, 1, file);
 			ultoa(req -> tv_nsec, &buffer[0], 10);
 			fwrite(&buffer[0], strlen(&buffer[0]), 1, file);
 		}
